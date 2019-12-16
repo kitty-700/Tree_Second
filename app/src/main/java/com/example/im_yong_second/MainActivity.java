@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -15,8 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Stack;
@@ -65,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void init_listner() {
+        navigator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         this.qq_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     void perform_QQ() { //Quiz 로 팝업?
-        AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(mainActivity);
         int number = (int) (Math.random() * SubjectInfo.eff_ps.size());
         Piece piece = SubjectInfo.eff_ps.get(number);
         builder.setTitle(piece.title);
@@ -199,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
     void display_memo(Piece picked_piece) {
         if (is_have_memo(picked_piece)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(mainActivity);
             builder.setTitle(picked_piece.title);
             builder.setMessage(picked_piece.memo);
             builder.setNegativeButton("OK", null);
